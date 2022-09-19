@@ -23,6 +23,8 @@ func getEnvValue(v string) string {
 	return value
 }
 
+func subscriber(user string, ad string) {}
+
 func main() {
 	server()
 }
