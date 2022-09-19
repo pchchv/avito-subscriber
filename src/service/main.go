@@ -1,4 +1,4 @@
-package avito_subscriber
+package main
 
 import (
 	"log"
@@ -23,4 +23,5 @@ func getEnvValue(v string) string {
 	return value
 }
 
-func main() {}
+func main() {
+}
