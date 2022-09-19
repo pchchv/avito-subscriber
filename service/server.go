@@ -14,6 +14,7 @@ func pingHandler(c echo.Context) error {
 	return c.String(http.StatusOK, message)
 }
 
+// Subscribing a user to an ad
 func subscribeHandler(c echo.Context) error {
 	user := c.QueryParam("user")
 	link := c.QueryParam("link")
@@ -26,6 +27,7 @@ func subscribeHandler(c echo.Context) error {
 func routes(e *echo.Echo) {
 	e.GET("/", pingHandler)
 	e.GET("/ping", pingHandler)
+	e.POST("/subscribe", subscribeHandler)
 }
 
 func server() {
