@@ -10,7 +10,7 @@ import (
 
 // Checks that the server is up and running
 func pingHandler(c echo.Context) error {
-	message := "QR Code creation service. Version 1.0.0"
+	message := "Avito Subscriber service. Version 0.0.1"
 	return c.String(http.StatusOK, message)
 }
 
