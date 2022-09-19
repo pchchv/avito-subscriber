@@ -23,6 +23,8 @@ func getEnvValue(v string) string {
 	return value
 }
 
+func getAllAds(user string) {}
+
 func subscriber(user string, ad string) {}
 
 func main() {
