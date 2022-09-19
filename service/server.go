@@ -14,6 +14,14 @@ func pingHandler(c echo.Context) error {
 	return c.String(http.StatusOK, message)
 }
 
+func subscribeHandler(c echo.Context) error {
+	user := c.QueryParam("user")
+	link := c.QueryParam("link")
+	subscriber(user, link)
+	message := ""
+	return c.String(http.StatusOK, message)
+}
+
 // The declaration of all routes comes from it
 func routes(e *echo.Echo) {
 	e.GET("/", pingHandler)
