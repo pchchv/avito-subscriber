@@ -95,8 +95,13 @@ func updater() {
 		if price != ad.price {
 			ad.price = price
 			// TODO: Update data in the database
+			notifier(ad)
 		}
 	}
+}
+
+func notifier(ad Ad) {
+	// TDDO: Implement sending a price change notification
 }
 
 func priceGetter(url string) int {
