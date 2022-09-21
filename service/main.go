@@ -34,7 +34,7 @@ func getEnvValue(v string) string {
 	return value
 }
 
-func getAllAds(user string) ([]Ad, error) {
+func getAllAds() ([]Ad, error) {
 	var bsonAds []bson.M
 	var ads []Ad
 	var ad Ad
@@ -81,6 +81,12 @@ func checkInDB(url string) (Ad, error) {
 	bsonBytes, _ := bson.Marshal(ads[0])
 	bson.Unmarshal(bsonBytes, &ad)
 	return ad, nil
+}
+
+func priceChecker(url string) int {
+	var price int
+	// TODO: Get the price by parseing the page from the URL
+	return price
 }
 
 func main() {
