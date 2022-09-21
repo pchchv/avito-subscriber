@@ -16,6 +16,7 @@ var collection *mongo.Collection
 type Ad struct {
 	url   string
 	users []string
+	price int
 }
 
 func init() {
