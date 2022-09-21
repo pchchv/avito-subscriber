@@ -10,6 +10,11 @@ import (
 
 var collection *mongo.Collection
 
+type Ad struct {
+	link  string
+	users []string
+}
+
 func init() {
 	// Load values from .env into the system
 	if err := godotenv.Load(); err != nil {
