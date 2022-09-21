@@ -63,6 +63,7 @@ func subscriber(user string, url string) {
 		ad.url = url
 	}
 	ad.users = append(ad.users, user)
+	ad.price = priceGetter(url)
 	// TODO: Implement adding a structure to a mongo
 }
 
@@ -84,7 +85,7 @@ func checkInDB(url string) (Ad, error) {
 	return ad, nil
 }
 
-func priceChecker(url string) int {
+func priceGetter(url string) int {
 	var price int
 	// TODO: Get the price by parseing the page from the URL
 	return price
