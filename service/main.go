@@ -85,6 +85,20 @@ func checkInDB(url string) (Ad, error) {
 	return ad, nil
 }
 
+func updater() {
+	ads, err := getAllAds()
+	if err != nil {
+		log.Println(err)
+	}
+	for _, ad := range ads {
+		price := priceGetter(ad.url)
+		if price != ad.price {
+			ad.price = price
+			// TODO: Update data in the database
+		}
+	}
+}
+
 func priceGetter(url string) int {
 	var price int
 	// TODO: Get the price by parseing the page from the URL
