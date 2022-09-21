@@ -5,7 +5,10 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
+	"go.mongodb.org/mongo-driver/mongo"
 )
+
+var collection *mongo.Collection
 
 func init() {
 	// Load values from .env into the system
@@ -28,5 +31,6 @@ func getAllAds(user string) {}
 func subscriber(user string, ad string) {}
 
 func main() {
+	db()
 	server()
 }
