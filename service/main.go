@@ -33,7 +33,12 @@ func getEnvValue(v string) string {
 
 func getAllAds(user string) {}
 
-func subscriber(user string, ad string) {}
+func subscriber(user string, link string) {
+	var ad Ad
+	ad.link = link
+	ad.users = append(ad.users, user)
+	// TODO: Implement adding a structure to a mongo
+}
 
 func main() {
 	db()
