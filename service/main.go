@@ -1,17 +1,20 @@
 package main
 
 import (
+	"context"
+	"errors"
 	"log"
 	"os"
 
 	"github.com/joho/godotenv"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 var collection *mongo.Collection
 
 type Ad struct {
-	link  string
+	url   string
 	users []string
 }
 
@@ -33,11 +36,31 @@ func getEnvValue(v string) string {
 
 func getAllAds(user string) {}
 
-func subscriber(user string, link string) {
-	var ad Ad
-	ad.link = link
+func subscriber(user string, url string) {
+	ad, err := checkInDB(url)
+	if err != nil {
+		ad.url = url
+	}
 	ad.users = append(ad.users, user)
 	// TODO: Implement adding a structure to a mongo
+}
+
+func checkInDB(url string) (Ad, error) {
+	var ads []bson.M
+	var ad Ad
+	res, err := collection.Find(context.TODO(), bson.M{"url": url})
+	if err != nil {
+		log.Panic(err)
+	}
+	if err = res.All(context.TODO(), &ads); err != nil {
+		log.Panic(err)
+	}
+	if ads == nil {
+		return ad, errors.New("Ad not found")
+	}
+	bsonBytes, _ := bson.Marshal(ads[0])
+	bson.Unmarshal(bsonBytes, &ad)
+	return ad, nil
 }
 
 func main() {
