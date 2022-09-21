@@ -34,7 +34,27 @@ func getEnvValue(v string) string {
 	return value
 }
 
-func getAllAds(user string) {}
+func getAllAds(user string) ([]Ad, error) {
+	var bsonAds []bson.M
+	var ads []Ad
+	var ad Ad
+	res, err := collection.Find(context.TODO(), bson.M{})
+	if err != nil {
+		log.Panic(err)
+	}
+	if err = res.All(context.TODO(), &ads); err != nil {
+		log.Panic(err)
+	}
+	if bsonAds == nil {
+		return ads, errors.New("Ad not found")
+	}
+	for _, a := range bsonAds {
+		bsonBytes, _ := bson.Marshal(a)
+		bson.Unmarshal(bsonBytes, &ad)
+		ads = append(ads, ad)
+	}
+	return ads, nil
+}
 
 func subscriber(user string, url string) {
 	ad, err := checkInDB(url)
